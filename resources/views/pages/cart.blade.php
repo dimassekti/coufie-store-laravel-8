@@ -4,12 +4,15 @@
   Store Cart Page
 @endsection
 
-
 @section('content')
   <!-- Page Content -->
 
   <div class="page-content page-cart">
-    <section class="store-breadcrumbs" data-aos="fade-down" data-aos-delay="100">
+    <section
+      class="store-breadcrumbs"
+      data-aos="fade-down"
+      data-aos-delay="100"
+    >
       <div class="container">
         <div class="row">
           <div class="col-12">
@@ -28,7 +31,11 @@
     <!--  -->
     <section class="store-cart">
       <div class="container">
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <div
+          class="row"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
           <div class="col-12 table-responsive">
             <table class="table table-borderless table-cart">
               <thead>
@@ -46,8 +53,11 @@
                   <tr>
                     <td style="width: 20%">
                       @if ($cart->product->galleries)
-                        <img src="{{ Storage::url($cart->product->galleries->first()->photos) }}" alt=""
-                          class="cart-images w-75" />
+                        <img
+                          src="{{ Storage::url($cart->product->galleries->first()->photos ?? '') }}"
+                          alt=""
+                          class="cart-images w-75"
+                        />
                       @endif
                     </td>
                     <td style="width: 35%">
@@ -59,10 +69,16 @@
                       <div class="product-subtitle">USD</div>
                     </td>
                     <td style="width: 20%">
-                      <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
+                      <form
+                        action="{{ route('cart-delete', $cart->id) }}"
+                        method="POST"
+                      >
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="btn btn-remove-cart">remove</button>
+                        <button
+                          type="submit"
+                          class="btn btn-remove-cart"
+                        >remove</button>
                       </form>
                     </td>
                   </tr>
@@ -71,14 +87,16 @@
                   @endphp
                 @endforeach
 
-
-
               </tbody>
             </table>
           </div>
         </div>
         <!--  -->
-        <div class="row" data-aos="fade-up" data-aos-delay="150">
+        <div
+          class="row"
+          data-aos="fade-up"
+          data-aos-delay="150"
+        >
           <div class="col-12">
             <hr />
           </div>
@@ -87,73 +105,142 @@
           </div>
         </div>
         <!--  -->
-        <form action="{{ route('checkout') }}" enctype="multipart/form-data" method="POST" id="locations">
+        <form
+          id="locations"
+          action="{{ route('checkout') }}"
+          enctype="multipart/form-data"
+          method="POST"
+        >
           @csrf
-          <input type="hidden" name="total_price" value="{{ $totalPrice }}">
+          <input
+            type="hidden"
+            name="total_price"
+            value="{{ $totalPrice }}"
+          >
 
-          <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
+          <div
+            class="row mb-2"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <div class="col-md-6">
               <div class="form-group">
                 <label for="address_one">Address 1</label>
-                <input type="text" class="form-control" id="address_one" name="address_one" value="Kembangan Street" />
+                <input
+                  id="address_one"
+                  type="text"
+                  class="form-control"
+                  name="address_one"
+                  value="Kembangan Street"
+                />
               </div>
             </div>
             <!--  -->
             <div class="col-md-6">
               <div class="form-group">
                 <label for="address_two">Address 2</label>
-                <input type="text" class="form-control" id="address_two" name="address_two" value="No 112" />
+                <input
+                  id="address_two"
+                  type="text"
+                  class="form-control"
+                  name="address_two"
+                  value="No 112"
+                />
               </div>
             </div>
             <!--  -->
             <div class="col-md-4">
               <div class="form-group">
                 <label for="provinces_id">Province</label>
-                <select name="provinces_id" id="provinces_id" class="form-control" v-if="provinces"
-                  v-model="provinces_id">
-                  <option v-for="province in provinces" :value="province.id">@{{ province.name }}
+                <select
+                  v-if="provinces"
+                  id="provinces_id"
+                  v-model="provinces_id"
+                  name="provinces_id"
+                  class="form-control"
+                >
+                  <option
+                    v-for="province in provinces"
+                    :value="province.id"
+                  >@{{ province.name }}
                   </option>
                 </select>
-                <select v-else class="form-control" id=""></select>
+                <select
+                  v-else
+                  id=""
+                  class="form-control"
+                ></select>
               </div>
             </div>
             <!--  -->
             <div class="col-md-4">
               <div class="form-group">
                 <label for="regencies_id">City</label>
-                <select name="regencies_id" id="regencies_id" class="form-control" v-if="regencies"
-                  v-model="regencies_id">
-                  <option v-for="regency in regencies" :value="regency.id">@{{ regency.name }}
+                <select
+                  v-if="regencies"
+                  id="regencies_id"
+                  v-model="regencies_id"
+                  name="regencies_id"
+                  class="form-control"
+                >
+                  <option
+                    v-for="regency in regencies"
+                    :value="regency.id"
+                  >@{{ regency.name }}
                   </option>
                 </select>
-                <select v-else class="form-control"></select>
+                <select
+                  v-else
+                  class="form-control"
+                ></select>
               </div>
             </div>
             <!--  -->
             <div class="col-md-4">
               <div class="form-group">
                 <label for="zip_code">Postal Code</label>
-                <input type="text" class="form-control" id="zip_code" name="zip_code" value="11111" />
+                <input
+                  id="zip_code"
+                  type="text"
+                  class="form-control"
+                  name="zip_code"
+                  value="11111"
+                />
               </div>
             </div>
             <!--  -->
             <div class="col-md-6">
               <div class="form-group">
                 <label for="country">Country</label>
-                <input type="text" class="form-control" id="country" name="country" value="Indonesia" />
+                <input
+                  id="country"
+                  type="text"
+                  class="form-control"
+                  name="country"
+                  value="Indonesia"
+                />
               </div>
             </div>
             <!--  -->
             <div class="col-md-6">
               <div class="form-group">
                 <label for="phone_number">Mobile</label>
-                <input type="text" class="form-control" id="phone_number" name="phone_number"
-                  value="+628 2022 00000" />
+                <input
+                  id="phone_number"
+                  type="text"
+                  class="form-control"
+                  name="phone_number"
+                  value="+628 2022 00000"
+                />
               </div>
             </div>
           </div>
           <!--  -->
-          <div class="row" data-aos="fade-up" data-aos-delay="150">
+          <div
+            class="row"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
             <div class="col-12">
               <hr />
             </div>
@@ -162,7 +249,11 @@
             </div>
           </div>
           <!--  -->
-          <div class="row" data-aos="fade-up" data-aos-delay="200">
+          <div
+            class="row"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <div class="col-4 col-md-2">
               <div class="product-title">$10</div>
               <div class="product-subtitle">Country Tax</div>
@@ -180,7 +271,10 @@
               <div class="product-subtitle">Total</div>
             </div>
             <div class="col-8 col-md-4">
-              <button type="submit" class="btn btn-success mt-4 px-4 btn-block">
+              <button
+                type="submit"
+                class="btn btn-success mt-4 px-4 btn-block"
+              >
                 Checkout Now
               </button>
             </div>
@@ -191,12 +285,13 @@
   </div>
 @endsection
 
-
-
 @push('addon-script')
   <script src="/vendor/vue/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="/js/app.js" type="text/javascript"></script>
+  <script
+    src="/js/app.js"
+    type="text/javascript"
+  ></script>
   <script>
     var locations = new Vue({
       el: "#locations",
